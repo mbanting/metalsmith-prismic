@@ -12,14 +12,14 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 
 ### CLI Usage
 
-  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the url of your Prismic.io repository. The accessToken is optional, depending if your repository needs it or not.
+  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the url (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. The accessToken is optional, depending if your repository needs it or not.
 
 
 ```json
 {
   "plugins": {
     "metalsmith-prismic": {
-      "url": "https://lesbonneschoses.prismic.io/api",
+      "url": "<your repository's API url>",
       "accessToken": "<optional accessToken>"
     }
   }
@@ -35,7 +35,7 @@ var prismic = require('metalsmith-prismic');
 
 // pull in content from Prismic
 .use(prismic({
-    "url": "https://rbrps.prismic.io/api",
+    "url": "<your repository's API url>",
     "accessToken": "<optional access token>"
 }))
 ```
