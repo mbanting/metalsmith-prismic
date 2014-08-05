@@ -12,7 +12,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 
 ### CLI Usage
 
-  Install the node modules and then add the `metalsmith-prismic` url of your Prismic.io repository to your `metalsmith.json` plugins. The URL to your Prismic repository is required. The accessToken is optional, depending if your repository needs it or not.
+  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the url of your Prismic.io repository. The accessToken is optional, depending if your repository needs it or not.
 
 
 ```json
@@ -73,7 +73,6 @@ prismic:
 This pulls the Prismic response into the file's metadata.
 
 ```yaml
----
 ---
   template: "index_en.hbt"
   prismic: 
