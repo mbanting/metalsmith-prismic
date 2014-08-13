@@ -12,7 +12,11 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 
 ### CLI Usage
 
-  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the url (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. The accessToken is optional, depending if your repository needs it or not.
+  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the 
+- `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. 
+- `accessToken` is optional, depending if your repository needs it or not. 
+- `release` with the name of the content release you want to generate; if none specified then master release will be generated
+- `linkResolver` an optional function to generate links; if none specified then a default format of "/<document.type>/<document.id>/<document.slug>" will be used
 
 
 ```json
@@ -20,7 +24,8 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
   "plugins": {
     "metalsmith-prismic": {
       "url": "<your repository's API url>",
-      "accessToken": "<optional accessToken>"
+      "accessToken": "<optional accessToken>",
+      "release": "<optional release name>",
     }
   }
 }
@@ -36,13 +41,15 @@ var prismic = require('metalsmith-prismic');
 // pull in content from Prismic
 .use(prismic({
     "url": "<your repository's API url>",
-    "accessToken": "<optional access token>"
+    "accessToken": "<optional access token>",
+    "release": "<optional release name>",
+    "linkResolver": <optional linkResolver function>
 }))
 ```
 
 ## Usage
 
-Pulling in content from the site's [repository] in [Prismic.io] for display is a two step process. 
+Pulling in content from the site's repository in [Prismic.io] for display is a two step process. 
 
 ##### Query the Content
 In your file's metadata add the Prismic queries
@@ -165,7 +172,6 @@ Now that this content from Prismic is available in the file's metadata, you can 
 ```
 
 ## To Do
-- Currently this only works with the _master_ release of your Prismic repository. Future version will allow you to specify which release to use, or generate the site for every release.
 - This plugin is still early in development and has only been tested with a limited set of Prismic queries and predicates. If anything isn't working please let me know!
 - Unit tests!!
 
