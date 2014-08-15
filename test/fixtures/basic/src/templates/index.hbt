@@ -1,0 +1,10 @@
+<html>
+<body>
+<ul>
+{{#each prismic.macaron.results}}
+    <li>{{{data.name.html}}}
+        {{{data.description.html}}}
+    </li>
+{{/each}}
+</body>
+</html>
