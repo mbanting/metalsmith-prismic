@@ -28,6 +28,34 @@ describe('metalsmith-prismic', function(){
                 done();
             });
     });
+
+    it('should generate links with the custom linkResolver', function(done){
+        Metalsmith('test/fixtures/linkResolver')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api",
+                "linkResolver": function (ctx, doc) {
+                    if (doc.isBroken) return false;
+                    return '/' + doc.type + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');
+                }
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars",
+                "directory": "src/templates"    // templates need to be in src so they can be watched
+            }))
+
+            // do not include templating files into build
+            .use(ignore('templates/*'))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/linkResolver/expected', 'test/fixtures/linkResolver/build');
+                done();
+            });
+    });
 });
 
 

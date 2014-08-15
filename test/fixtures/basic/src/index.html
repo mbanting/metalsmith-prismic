@@ -4,4 +4,6 @@ prismic:
   macaron:
     query: '[[:d = at(document.tags, ["Macaron"])] [:d = any(document.type, ["product"])]]'
     orderings: '[my.product.name]'
+  jobOffers:
+    query: '[[:d = any(document.type, ["job-offer"])]]'
 ---
