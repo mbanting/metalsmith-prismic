@@ -51,8 +51,8 @@ var prismic = require('metalsmith-prismic');
 
 Pulling in content from the site's repository in [Prismic.io] for display is a two step process. 
 
-##### Query the Content
-In your file's metadata add the Prismic queries
+##### Query (and Order) the Content
+In your file's metadata add the Prismic queries and orderings
 ```yaml
 ---
 template: index_en.hbt
@@ -61,6 +61,7 @@ prismic:
     query: '[[:d = at(document.type, "page-header-footer")]]'
   hero-slide:
     query: '[[:d = at(document.type, "hero-slide")]]'
+    orderings: '[my.hero-slide.seqNum]'
 ---
 ```
 By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the form name (eg. collection name)
@@ -72,6 +73,7 @@ prismic:
     query: '[[:d = at(document.type, "page-header-footer")]]'
   hero-slide:
     query: '[[:d = at(document.type, "hero-slide")]]'
+    orderings: '[my.hero-slide.seqNum]'
   blog:
     query: '[[:d = at(document.type, "blog")]]'
     formName: 'tech-related'
@@ -118,6 +120,7 @@ This pulls the Prismic response into the file's metadata.
               html: "<span>Questions/Comments</span>"
     hero-slide: 
       query: "[[:d = at(document.type, \"hero-slide\")]]"
+      orderings: "[my.hero-slide.seqNum]"
       results: 
         - 
           id: <id>
