@@ -51,8 +51,8 @@ var prismic = require('metalsmith-prismic');
 
 Pulling in content from the site's repository in [Prismic.io] for display is a two step process. 
 
-##### Query (and Order) the Content
-In your file's metadata add the Prismic queries and orderings
+##### Query (and optionally, Order) the Content
+In your file's metadata add the Prismic queries and optional orderings
 ```yaml
 ---
 template: index_en.hbt
