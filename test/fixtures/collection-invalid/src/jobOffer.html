@@ -1,0 +1,11 @@
+---
+template: jobOffer.hbt
+prismic:
+  jobOffer:
+    query: '[[:d = any(document.type, ["job-offer"])]]'
+    collection:
+      fileExtension: 'html'
+  macaron:
+    query: '[[:d = at(document.tags, ["Macaron"])] [:d = any(document.type, ["product"])]]'
+    collection: true
+---

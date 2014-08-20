@@ -1,0 +1,18 @@
+<html>
+<body>
+{{{prismic.jobOffer.results.[0].data.name.html}}}
+{{{prismic.jobOffer.results.[0].data.profile.html}}}
+{{{prismic.jobOffer.results.[0].data.description.html}}}
+
+And here are all the Macarons you can eat when you join our company:
+
+<ul>
+{{#each prismic.macaron.results}}
+    <li>{{{data.name.html}}}
+        {{{data.description.html}}}
+    </li>
+{{/each}}
+</ul>
+
+</body>
+</html>
