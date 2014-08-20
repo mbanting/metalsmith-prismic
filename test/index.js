@@ -4,7 +4,7 @@ var prismic = require('..');
 var templates = require('metalsmith-templates');
 
 describe('metalsmith-prismic', function(){
-    it.only('should retrieve content from Prismic', function(done){
+    it('should retrieve content from Prismic', function(done){
         Metalsmith('test/fixtures/basic')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api"
@@ -19,7 +19,7 @@ describe('metalsmith-prismic', function(){
 
             .build(function(err){
                 if (err) return done(err);
-                //equal('test/fixtures/basic/expected', 'test/fixtures/basic/build');
+                equal('test/fixtures/basic/expected', 'test/fixtures/basic/build');
                 done();
             });
     });
