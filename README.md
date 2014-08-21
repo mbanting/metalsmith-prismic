@@ -16,7 +16,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 - `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. 
 - `accessToken` is optional, depending if your repository needs it or not. 
 - `release` with the name of the content release you want to generate; if none specified then master release will be generated
-- `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/<document.type>/<document.id>/<document.slug>" will be used
+- `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;" will be used
 
 
 ```json
