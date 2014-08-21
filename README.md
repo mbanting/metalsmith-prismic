@@ -16,7 +16,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 - `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. 
 - `accessToken` is optional, depending if your repository needs it or not. 
 - `release` with the name of the content release you want to generate; if none specified then master release will be generated
-- `linkResolver` an optional function to generate links; if none specified then a default format of "/<document.type>/<document.id>/<document.slug>" will be used
+- `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;" will be used
 
 
 ```json
@@ -51,7 +51,7 @@ var prismic = require('metalsmith-prismic');
 
 Pulling in content from the site's repository in [Prismic.io] for display is a two step process. 
 
-##### Query (and optionally, Order) the Content
+##### Query and Order the Content
 In your file's metadata add the Prismic queries and optional orderings
 ```yaml
 ---
@@ -159,24 +159,62 @@ This pulls the Prismic response into the file's metadata.
 ---
 ```
 
+##### Generating a Collection of Files
+You'll often need to generate a collection of files from a collection of documents, such as blog posts. This can be achieved with the `collection` property designating that data binding to generate one file for every document in the query's result. 
+```yaml
+---
+template: blog-post.hbt
+prismic:
+  blog-post:
+    query: '[[:d = at(document.type, "blog-post")]]'
+    collection: true
+  page-header-footer:
+    query: '[[:d = at(document.type, "header")]]'
+---
+```
+In the example above, the query for the blog-post returns a collection of results (ie. a collection of blog posts). Because it's been designated as the collection to generate, a file for each blog post will be created, with each file containing the metadata for a single blog post. The results for all other queries, such as for the page-header-footer in the example above, will also be available for each of these generated files. At most one data binding can be designated as the collection for each source file.
+
+The location of these files will be determined by the `linkResolver` function, which, as mentioned above, can be overridden with your own function to determine the path in which these files are created in.
+
+Each of these generated files will, by default, have no file extension. To specify one, the `collection` can be further customized with the `fileExtension` property.
+```yaml
+---
+template: blog-post.hbt
+prismic:
+  blog-post:
+    query: '[[:d = at(document.type, "blog-post")]]'
+    collection:
+      fileExtension: 'html'
+  page-header-footer:
+    query: '[[:d = at(document.type, "header")]]'
+---
+```
+The example above will append a .html file extension to each generated blog-post file.
+
 ##### Displaying Content
 Now that this content from Prismic is available in the file's metadata, you can display it by using the [metalsmith-templates] plugin. For example, here is how to do it with the plugin's [Handlebars] engine.
 
 ```html
-<div class="collapse navbar-collapse" id="navbar-collapse">
-    <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="#intro">{{{ prismic.page-header-footer.results.[0].data.homeLabel_en.html }}}</a></li>
+<div>
+    <ul>
+        <li><a href="#intro">{{{ prismic.page-header-footer.results.[0].data.homeLabel_en.html }}}</a></li>
         <li><a href="#video">{{{ prismic.page-header-footer.results.[0].data.videoLabel_en.html }}}</a></li>
         <li><a href="#prizes">{{{ prismic.page-header-footer.results.[0].data.prizesLabel_en.html }}}</a></li>
         <li><a href="#news">{{{ prismic.page-header-footer.results.[0].data.newsLabel_en.html }}}</a></li>
         <li><a href="#comments">{{{ prismic.page-header-footer.results.[0].data.qcLabel_en.html }}}</a></li>
     </ul>
 </div>
+<div>
+    {{{prismic.blog-post.results.[0].data.title.html}}}
+    {{{prismic.blog-post.results.[0].data.author.html}}}
+    {{{prismic.blog-post.results.[0].data.post.html}}}
+</div>
 ```
 
 ## To Do
 - This plugin is still early in development and has only been tested with a limited set of Prismic queries and predicates. If anything isn't working please let me know!
-- Unit tests!!
+- Mock out Prismic for unit tests, and for integration tests switch to this project's own Prismic repository instead of using the default one
+- Allow the generation of the site for the active as well as each future release (ideal for content creators/publishers to preview their scheduled releases)
 
 ## License
 
