@@ -16,7 +16,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 - `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. 
 - `accessToken` is optional, depending if your repository needs it or not. 
 - `release` with the name of the content release you want to generate; if none specified then master release will be generated
-- `linkResolver` an optional function to generate links; if none specified then a default format of "/<document.type>/<document.id>/<document.slug>" will be used
+- `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/<document.type>/<document.id>/<document.slug>" will be used
 
 
 ```json
@@ -160,7 +160,7 @@ This pulls the Prismic response into the file's metadata.
 ```
 
 ##### Generating a Collection of Files
-Very often you'll need to generate a collection of files from a collection of documents, such as blog posts. This can be achieved with the `collection` property designating that data binding to generate one file for every document in the query's result. 
+You'll often need to generate a collection of files from a collection of documents, such as blog posts. This can be achieved with the `collection` property designating that data binding to generate one file for every document in the query's result. 
 ```yaml
 ---
 template: blog-post.hbt
