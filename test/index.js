@@ -68,6 +68,30 @@ describe('metalsmith-prismic', function(){
             });
     });
 
+    it('should generate multiple files from the results of the collection prismic query using a custom linkResolver', function(done){
+        Metalsmith('test/fixtures/collection-linkResolver')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api",
+                "linkResolver": function (ctx, doc) {
+                    if (doc.isBroken) return false;
+                    return '/' + doc.type + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');
+                }
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/collection-linkResolver/expected', 'test/fixtures/collection-linkResolver/build');
+                done();
+            });
+    });
+
     it.skip('should not allow more than one query to be a collection prismic query', function(done){
         Metalsmith('test/fixtures/collection-invalid')
             .use(prismic({
