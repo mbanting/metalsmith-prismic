@@ -52,7 +52,7 @@ var prismic = require('metalsmith-prismic');
 Pulling in content from the site's repository in [Prismic.io] for display is a two step process.
 
 ##### Query and Order the Content
-In your file's metadata add the Prismic queries and optional orderings and pageSize
+In your file's metadata add the Prismic queries and optional orderings or pageSize
 ```yaml
 ---
 template: index_en.hbt
@@ -75,6 +75,7 @@ prismic:
   hero-slide:
     query: '[[:d = at(document.type, "hero-slide")]]'
     orderings: '[my.hero-slide.seqNum]'
+    pageSize: 50
   blog:
     query: '[[:d = at(document.type, "blog")]]'
     formName: 'tech-related'
