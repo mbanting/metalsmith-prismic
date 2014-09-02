@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-prismic",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "A Metalsmith.io plugin to integrate and pull in content from Prismic.io",
   "main": "lib/index.js",
   "scripts": {
