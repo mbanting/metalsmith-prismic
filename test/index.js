@@ -110,6 +110,26 @@ describe('metalsmith-prismic', function(){
                 done();
             });
     });
+
+    it('should retrieve max number of documents specified by pageSize', function(done){
+        Metalsmith('test/fixtures/pageSize')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/pageSize/expected', 'test/fixtures/pageSize/build');
+                done();
+            });
+    });
 });
 
 
