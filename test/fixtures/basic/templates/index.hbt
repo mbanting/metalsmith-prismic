@@ -2,14 +2,26 @@
 <body>
 <ul>
 {{#each prismic.macaron.results}}
-    <li>{{{data.name.html}}}
+    <li>
+        {{{data.name.html}}}
         {{{data.description.html}}}
     </li>
 {{/each}}
 </ul>
 <ul>
 {{#each prismic.jobOffers.results}}
-    <li>{{{data.name.html}}}
+    <li>
+        {{{data.name.html}}}
+        {{{data.location.html}}}
+        {{{data.profile.html}}}
+        {{{data.description.html}}}
+    </li>
+{{/each}}
+</ul>
+<ul>
+{{#each prismic.topJobOffers.results}}
+    <li>
+        {{{data.name.html}}}
         {{{data.location.html}}}
         {{{data.profile.html}}}
         {{{data.description.html}}}
