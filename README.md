@@ -12,9 +12,9 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 
 ### CLI Usage
 
-  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the 
-- `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository. 
-- `accessToken` is optional, depending if your repository needs it or not. 
+  Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the
+- `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository.
+- `accessToken` is optional, depending if your repository needs it or not.
 - `release` with the name of the content release you want to generate; if none specified then master release will be generated
 - `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;" will be used
 
@@ -33,7 +33,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 
 ### Javascript Usage
 
-  Instead of using the CLI, you can configure your Metalsmith.io project to use the metalsmith-prismic plugin via Javascript. 
+  Instead of using the CLI, you can configure your Metalsmith.io project to use the metalsmith-prismic plugin via Javascript.
 
 ```js
 var prismic = require('metalsmith-prismic');
@@ -49,10 +49,10 @@ var prismic = require('metalsmith-prismic');
 
 ## Usage
 
-Pulling in content from the site's repository in [Prismic.io] for display is a two step process. 
+Pulling in content from the site's repository in [Prismic.io] for display is a two step process.
 
 ##### Query and Order the Content
-In your file's metadata add the Prismic queries and optional orderings
+In your file's metadata add the Prismic queries and optional orderings or pageSize
 ```yaml
 ---
 template: index_en.hbt
@@ -62,6 +62,7 @@ prismic:
   hero-slide:
     query: '[[:d = at(document.type, "hero-slide")]]'
     orderings: '[my.hero-slide.seqNum]'
+    pageSize: 50
 ---
 ```
 By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the form name (eg. collection name)
@@ -74,6 +75,7 @@ prismic:
   hero-slide:
     query: '[[:d = at(document.type, "hero-slide")]]'
     orderings: '[my.hero-slide.seqNum]'
+    pageSize: 50
   blog:
     query: '[[:d = at(document.type, "blog")]]'
     formName: 'tech-related'
@@ -84,71 +86,71 @@ This pulls the Prismic response into the file's metadata.
 ```yaml
 ---
   template: "index_en.hbt"
-  prismic: 
-    page-header-footer: 
+  prismic:
+    page-header-footer:
       query: "[[:d = at(document.type, \"page-header-footer\")]]"
-      results: 
-        - 
+      results:
+        -
           id: <id>
           type: "page-header-footer"
           href: <url>
           tags: []
           slug: "home"
-          slugs: 
+          slugs:
             - "home"
           linkedDocuments: []
-          data: 
-            homeLabel_en: 
-              json: 
+          data:
+            homeLabel_en:
+              json:
                 value: "Home"
               html: "<span>Home</span>"
-            videoLabel_en: 
-              json: 
+            videoLabel_en:
+              json:
                 value: "Video"
               html: "<span>Video</span>"
-            prizesLabel_en: 
-              json: 
+            prizesLabel_en:
+              json:
                 value: "Prizes"
               html: "<span>Prizes</span>"
-            newsLabel_en: 
-              json: 
+            newsLabel_en:
+              json:
                 value: "News"
               html: "<span>News</span>"
-            qcLabel_en: 
-              json: 
+            qcLabel_en:
+              json:
                 value: "Questions/Comments"
               html: "<span>Questions/Comments</span>"
-    hero-slide: 
+    hero-slide:
       query: "[[:d = at(document.type, \"hero-slide\")]]"
       orderings: "[my.hero-slide.seqNum]"
-      results: 
-        - 
+      results:
+        -
           id: <id>
           type: "hero-slide"
           href: <url>
           tags: []
           slug: "welcome-to-our-website"
-          slugs: 
+          slugs:
             - "welcome"
             - "welcome-to-our-website"
           linkedDocuments: []
-          data: 
-            title_en: 
-              json: 
-                blocks: 
-                  - 
+          data:
+            title_en:
+              json:
+                blocks:
+                  -
                     type: "heading1"
                     text: "Introducing our new site!"
                     spans: []
               html: "<h1>Introducing our new site!</h1>"
-            introduction_en: 
-              json: 
-                blocks: 
-                  - 
+            introduction_en:
+              json:
+                blocks:
+                  -
                     type: "paragraph"
                     text: "Welcome to our new site, generated by Metalsmith.io with content from Prismic!"
                     spans: []
-                  - 
+                  -
                     type: "paragraph"
                     text: "Why? Because the two combined is a sweet combo"
                     spans: []
@@ -160,7 +162,7 @@ This pulls the Prismic response into the file's metadata.
 ```
 
 ##### Generating a Collection of Files
-You'll often need to generate a collection of files from a collection of documents, such as blog posts. This can be achieved with the `collection` property designating that data binding to generate one file for every document in the query's result. 
+You'll often need to generate a collection of files from a collection of documents, such as blog posts. This can be achieved with the `collection` property designating that data binding to generate one file for every document in the query's result.
 ```yaml
 ---
 template: blog-post.hbt
