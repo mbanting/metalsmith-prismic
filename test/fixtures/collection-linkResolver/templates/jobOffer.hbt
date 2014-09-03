@@ -7,11 +7,11 @@
 And here are all the Macarons you can eat when you join our company:
 
 <ul>
-{{#each prismic.macaron.results}}
+{{#each prismic.macaron.results ~}}
     <li>{{{data.name.html}}}
         {{{data.description.html}}}
     </li>
-{{/each}}
+{{/each ~}}
 </ul>
 
 </body>

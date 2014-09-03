@@ -1,22 +1,22 @@
 <html>
 <body>
 <ul>
-{{#each prismic.macaron.results}}
+{{#each prismic.macaron.results ~}}
     <li>
         {{{data.name.html}}}
         {{{data.description.html}}}
     </li>
-{{/each}}
+{{/each ~}}
 </ul>
 <ul>
-{{#each prismic.jobOffers.results}}
+{{#each prismic.jobOffers.results ~}}
     <li>
         {{{data.name.html}}}
         {{{data.location.html}}}
         {{{data.profile.html}}}
         {{{data.description.html}}}
     </li>
-{{/each}}
+{{/each ~}}
 </ul>
 </body>
 </html>

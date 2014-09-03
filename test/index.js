@@ -2,6 +2,7 @@ var equal = require('assert-dir-equal');
 var Metalsmith = require('metalsmith');
 var prismic = require('..');
 var templates = require('metalsmith-templates');
+var beautify = require('metalsmith-beautify');
 
 describe('metalsmith-prismic', function(){
     it('should retrieve content from Prismic', function(done){
@@ -16,6 +17,8 @@ describe('metalsmith-prismic', function(){
             .use(templates({
                 "engine": "handlebars"
             }))
+
+            .use (beautify())
 
             .build(function(err){
                 if (err) return done(err);
@@ -41,6 +44,8 @@ describe('metalsmith-prismic', function(){
                 "engine": "handlebars"
             }))
 
+            .use (beautify())
+
             .build(function(err){
                 if (err) return done(err);
                 equal('test/fixtures/linkResolver/expected', 'test/fixtures/linkResolver/build');
@@ -60,6 +65,8 @@ describe('metalsmith-prismic', function(){
             .use(templates({
                 "engine": "handlebars"
             }))
+
+            .use (beautify())
 
             .build(function(err){
                 if (err) return done(err);
@@ -85,6 +92,8 @@ describe('metalsmith-prismic', function(){
                 "engine": "handlebars"
             }))
 
+            .use (beautify())
+
             .build(function(err){
                 if (err) return done(err);
                 equal('test/fixtures/collection-linkResolver/expected', 'test/fixtures/collection-linkResolver/build');
@@ -105,6 +114,8 @@ describe('metalsmith-prismic', function(){
                 "engine": "handlebars"
             }))
 
+            .use (beautify())
+
             .build(function(err){
                 if (err) return done(err);
                 done();
@@ -123,6 +134,8 @@ describe('metalsmith-prismic', function(){
             .use(templates({
                 "engine": "handlebars"
             }))
+
+            .use (beautify())
 
             .build(function(err){
                 if (err) return done(err);
