@@ -6,6 +6,7 @@ var beautify = require('metalsmith-beautify');
 
 describe('metalsmith-prismic', function(){
     it('should retrieve content from Prismic', function(done){
+        this.timeout(5000);
         Metalsmith('test/fixtures/basic')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api"
@@ -28,6 +29,7 @@ describe('metalsmith-prismic', function(){
     });
 
     it('should generate links with the custom linkResolver', function(done){
+        this.timeout(5000);
         Metalsmith('test/fixtures/linkResolver')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api",
@@ -54,6 +56,7 @@ describe('metalsmith-prismic', function(){
     });
 
     it('should generate multiple files from the results of the collection prismic query', function(done){
+        this.timeout(5000);
         Metalsmith('test/fixtures/collection')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api"
@@ -76,6 +79,7 @@ describe('metalsmith-prismic', function(){
     });
 
     it('should generate multiple files from the results of the collection prismic query using a custom linkResolver', function(done){
+        this.timeout(5000);
         Metalsmith('test/fixtures/collection-linkResolver')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api",
@@ -102,6 +106,7 @@ describe('metalsmith-prismic', function(){
     });
 
     it.skip('should not allow more than one query to be a collection prismic query', function(done){
+        this.timeout(5000);
         Metalsmith('test/fixtures/collection-invalid')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api"
@@ -123,6 +128,7 @@ describe('metalsmith-prismic', function(){
     });
 
     it('should retrieve max number of documents specified by pageSize', function(done){
+        this.timeout(5000);
         Metalsmith('test/fixtures/pageSize')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api"
