@@ -28,7 +28,7 @@
     "underscore": "^1.6.0"
   },
   "devDependencies": {
-    "assert-dir-equal": "0.0.1",
+    "assert-dir-equal": "1.0.1",
     "handlebars": "^2.0.0-alpha.4",
     "metalsmith": "^0.9.0",
     "metalsmith-beautify": "0.0.7",
