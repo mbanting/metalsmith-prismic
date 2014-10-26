@@ -176,9 +176,16 @@ prismic:
 ```
 In the example above, the query for the blog-post returns a collection of results (ie. a collection of blog posts). Because it's been designated as the collection to generate, a file for each blog post will be created, with each file containing the metadata for a single blog post. The results for all other queries, such as for the page-header-footer in the example above, will also be available for each of these generated files. At most one data binding can be designated as the collection for each source file.
 
-The location of these files will be determined by the `linkResolver` function, which, as mentioned above, can be overridden with your own function to determine the path in which these files are created in.
+The location of these files will be determined by the `linkResolver` function, which, as mentioned above, can be overridden with your own function to determine the path in which these files are created in. In addition, the filename of the source will be injected into the `ctx.path` property so you can use it in your `linkResolver` function.
+```js
+"linkResolver": function (ctx, doc) {
+    if (doc.isBroken) return;
+    // create file based off of type, id and the filename (extracted from the full path)
+    return '/' + doc.type + '/' + doc.id + '/' +  ctx.path.replace(/^.*(\\|\/|\:)/, '');
+}
+```
 
-Each of these generated files will, by default, have no file extension. To specify one, the `collection` can be further customized with the `fileExtension` property.
+As mentioned above, if no `linkResolver` function is provided the default one will be used, generating links with the default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;". This  will generate files with no file extension. To specify one, the `collection` can be further customized with the `fileExtension` property.
 ```yaml
 ---
 template: blog-post.hbt
