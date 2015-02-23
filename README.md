@@ -1,5 +1,4 @@
-metalsmith-prismic
-==================
+# metalsmith-prismic [![Build Status](https://travis-ci.org/mbanting/metalsmith-prismic.svg?branch=master)](https://travis-ci.org/mbanting/metalsmith-prismic)
 
 A Metalsmith.io plugin to pull in content from [Prismic.io]
 
