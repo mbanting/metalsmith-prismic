@@ -130,6 +130,26 @@ describe('metalsmith-prismic', function(){
                 done();
             });
     });
+
+    it('should override pageSize and retrieve all documents with allPages option', function(done){
+        Metalsmith('test/fixtures/appPages')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/appPages/expected', 'test/fixtures/appPages/build');
+                done();
+            });
+    });
 });
 
 

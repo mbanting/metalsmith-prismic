@@ -64,6 +64,10 @@ prismic:
     pageSize: 50
 ---
 ```
+The optional `pageSize` parameter specifies the maximum number of results to retrieve for the query. The default is based on Prismic's own default of 20 items. Prismic also caps the maximum results for each query at 100. Any pageSize set above this number will be ignored by Prismic. 
+
+To get around this limitation and retrieve all results, use the optional `allPages` parameter and set it to true. Doing so will force the plugin to override the `pageSize` and get all results by repeatedly executing the query against Prismic.
+
 By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the form name (eg. collection name)
 ```yaml
 ---
@@ -77,6 +81,7 @@ prismic:
     pageSize: 50
   blog:
     query: '[[:d = at(document.type, "blog")]]'
+    allPages: true
     formName: 'tech-related'
 ---
 ```
