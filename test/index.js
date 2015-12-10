@@ -1,4 +1,5 @@
 var equal = require('assert-dir-equal');
+var assert = require('assert');
 var Metalsmith = require('metalsmith');
 var prismic = require('..');
 var templates = require('metalsmith-templates');
@@ -147,6 +148,30 @@ describe('metalsmith-prismic', function(){
             .build(function(err){
                 if (err) return done(err);
                 equal('test/fixtures/appPages/expected', 'test/fixtures/appPages/build');
+                done();
+            });
+    });
+
+    it('should preserve file contents as Buffer on collection files', function(done){
+        Metalsmith('test/fixtures/collection')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use custom plugin to detect content types
+            .use(function(files, metalsmith, msDone) {
+                var n = Object.keys(files).filter(function(file) {
+                    console.log('I HAVE A FILE')
+                    return files[file].contents.constructor !== Buffer;
+                });
+                assert.equal(n, 0);
+                msDone();
+            })
+
+            .build(function(err){
+                if (err) return done(err);
                 done();
             });
     });
