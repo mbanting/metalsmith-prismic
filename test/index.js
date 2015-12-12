@@ -163,7 +163,6 @@ describe('metalsmith-prismic', function(){
             // use custom plugin to detect content types
             .use(function(files, metalsmith, msDone) {
                 var n = Object.keys(files).filter(function(file) {
-                    console.log('I HAVE A FILE')
                     return files[file].contents.constructor !== Buffer;
                 });
                 assert.equal(n, 0);
