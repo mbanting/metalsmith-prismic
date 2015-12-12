@@ -23,6 +23,7 @@
   "homepage": "https://github.com/mbanting/metalsmith-prismic",
   "dependencies": {
     "async": "^1.2.1",
+    "clone": "^1.0.2",
     "debug": "^2.2.0",
     "prismic.io": "1.1.7",
     "underscore": "^1.8.3"
