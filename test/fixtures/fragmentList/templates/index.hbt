@@ -1,0 +1,18 @@
+<html>
+<body>
+<ul>
+{{#each prismic.store.results}}
+    <li>
+        {{{data.name.html}}}
+        <ul>
+          <li>{{{data.monday.0.html}}}{{{data.monday.1.html}}}</li>
+          <li>{{{data.tuesday.0.html}}}{{{data.tuesday.1.html}}}</li>
+          <li>{{{data.wednesday.0.html}}}{{{data.wednesday.1.html}}}</li>
+          <li>{{{data.thursday.0.html}}}{{{data.thursday.1.html}}}</li>
+          <li>{{{data.friday.0.html}}}{{{data.friday.1.html}}}</li>
+        </ul>
+    </li>
+{{/each}}
+</ul>
+</body>
+</html>

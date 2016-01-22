@@ -25,6 +25,26 @@ describe('metalsmith-prismic', function(){
             });
     });
 
+    it('should handle fragment lists', function(done){
+        Metalsmith('test/fixtures/fragmentList')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/fragmentList/expected', 'test/fixtures/fragmentList/build');
+                done();
+            });
+    });
+
     it('should generate links with the custom linkResolver', function(done){
         Metalsmith('test/fixtures/linkResolver')
             .use(prismic({
