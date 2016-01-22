@@ -1,0 +1,19 @@
+<html>
+<body>
+<ul>
+  {{#each prismic.jobOffers.results}}
+    <li>
+        {{{data.name.html}}}
+        <ul>
+          {{#each data.location}}
+            <li>
+                <span>{{children.name.json.0.text}}</span>
+                {{{children.address.html}}}
+            </li>
+          {{/each}}
+        </ul>
+    </li>
+  {{/each}}
+</ul>
+</body>
+</html>
