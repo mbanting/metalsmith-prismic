@@ -22,17 +22,17 @@
   },
   "homepage": "https://github.com/mbanting/metalsmith-prismic",
   "dependencies": {
-    "async": "^1.2.1",
+    "async": "^1.5.2",
     "clone": "^1.0.2",
     "debug": "^2.2.0",
-    "prismic.io": "1.1.7",
+    "prismic.io": "1.4.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
     "assert-dir-equal": "^1.0.1",
-    "handlebars": "^3.0.3",
+    "handlebars": "^4.0.5",
     "metalsmith": "^1.7.0",
     "metalsmith-templates": "^0.7.0",
-    "mocha": "^2.2.5"
+    "mocha": "^2.4.5"
   }
 }
