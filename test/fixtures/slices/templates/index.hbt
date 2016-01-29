@@ -1,0 +1,34 @@
+<html>
+<body>
+<ul>
+{{#each prismic.slices.results}}
+    <li>
+        {{#each data.body.children}}
+        <div class="{{this.sliceType}}">
+            {{{this.html}}}
+        </div>
+        {{/each}}
+    </li>
+{{/each}}
+</ul>
+<ul>
+{{#each prismic.slices-group.results}}
+    <li>
+        {{#each data.body.children}}
+        <div class="{{this.sliceType}}">
+            {{!-- {{Workaround for missing switch-case in Handlebars}} --}}
+            {{#each this.children}}
+            <div class="image">
+                {{{this.illustration.html}}}
+                {{{this.caption.html}}}
+            </div>
+            {{else}}
+            {{{this.html}}}
+            {{/each}}
+        </div>
+        {{/each}}
+    </li>
+{{/each}}
+</ul>
+</body>
+</html>

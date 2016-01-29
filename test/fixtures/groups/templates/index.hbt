@@ -1,0 +1,31 @@
+<html>
+<body>
+<ul>
+{{#each prismic.group-single.results}}
+    <li>
+        {{{data.name.html}}}
+        <dl>
+        {{#each data.address.children.[0]}}
+            <dt>{{@key}}</dt>
+            <dd>{{{html}}}</dd>
+        {{/each}}
+        </dl>
+    </li>
+{{/each}}
+</ul>
+<ul>
+{{#each prismic.group-repeat.results}}
+    <li>
+        <ul>
+        {{#each data.gallery.children}}
+            <li>
+                {{{image.html}}}
+                {{{caption.html}}}
+            </li>
+        {{/each}}
+        </ul>
+    </li>
+{{/each}}
+</ul>
+</body>
+</html>
