@@ -174,6 +174,40 @@ describe('metalsmith-prismic', function(){
                 done();
             });
     });
+
+    it('should render release ref', function(done){
+        Metalsmith('test/fixtures/preview')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api",
+                "release": "UlfoxUnM08QWYXdk"  // St-Patrick specials
+            }))
+
+            // .use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/preview/expected', 'test/fixtures/preview/build');
+                done();
+            });
+    });
+
+    it('should fail gracefully on nonexistent release', function(done){
+        Metalsmith('test/fixtures/preview')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api",
+                "release": "invalid"
+            }))
+
+            .build(function(err){
+                assert.throws(assert.ifError.bind(null, err));
+                done();
+            });
+    });
 });
 
 
