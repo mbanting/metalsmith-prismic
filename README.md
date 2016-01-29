@@ -14,7 +14,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
   Install the node modules and add `metalsmith-prismic` to your list of plugins in `metalsmith.json`. Include the
 - `url` (eg. https://lesbonneschoses.prismic.io/api) of your Prismic.io repository.
 - `accessToken` is optional, depending if your repository needs it or not.
-- `release` with the name of the content release you want to generate; if none specified then master release will be generated
+- `release` the name or raw reference of the release you want to generate; if none specified then master release will be generated
 - `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;" will be used
 
 
@@ -24,7 +24,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
     "metalsmith-prismic": {
       "url": "<your repository's API url>",
       "accessToken": "<optional accessToken>",
-      "release": "<optional release name>",
+      "release": "<optional release name or raw reference value>",
     }
   }
 }
@@ -41,7 +41,7 @@ var prismic = require('metalsmith-prismic');
 .use(prismic({
     "url": "<your repository's API url>",
     "accessToken": "<optional access token>",
-    "release": "<optional release name>",
+    "release": "<optional release name or raw reference value>",
     "linkResolver": <optional linkResolver function>
 }))
 ```
@@ -227,7 +227,6 @@ Now that this content from Prismic is available in the file's metadata, you can 
 ## To Do
 - This plugin is still early in development and has only been tested with a limited set of Prismic queries and predicates. If anything isn't working please let me know!
 - Mock out Prismic for unit tests, and for integration tests switch to this project's own Prismic repository instead of using the default one
-- Allow the generation of the site for the active as well as each future release (ideal for content creators/publishers to preview their scheduled releases)
 
 ## License
 
