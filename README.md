@@ -226,6 +226,19 @@ Now that this content from Prismic is available in the file's metadata, you can 
 </div>
 ```
 
+### htmlSerializer
+If you choose to pass a custom `htmlSerializer` function, it will alter the `html` property of fragments with the applicable element types.
+
+```javascript
+
+"htmlSerializer": function (elem, content) {
+    // Add a class to all <h1>:
+    if (elem.type == "heading1") {
+        return '<h1 class="test-h1-class">' + content + '</h1>';
+    }
+}
+```
+
 ## To Do
 - This plugin is still early in development and has only been tested with a limited set of Prismic queries and predicates. If anything isn't working please let me know!
 - Mock out Prismic for unit tests, and for integration tests switch to this project's own Prismic repository instead of using the default one
