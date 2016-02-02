@@ -73,6 +73,9 @@ prismic:
 ###### query
 The required `query` parameter specifies the query to run, following the [Prismic's predicate-based query syntax](https://developers.prismic.io/documentation/api-documentation#predicate-based-queries).
 
+###### bookmark
+The `query` parameter may be replaced by a `bookmark` parameter, which fetches a single document defined by a [Prismic bookmark](https://developers.prismic.io/documentation/repository-administrators-manual#bookmarks).
+
 ###### orderings
 The optional `orderings` parameter specifies how the results should be ordered, following the [Prismic's ordering syntax](https://developers.prismic.io/documentation/api-documentation#orderings).
 
