@@ -102,7 +102,7 @@ describe('metalsmith-prismic', function(){
                     return '/' + doc.type + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');
                 },
                 "htmlSerializer": function( elem, content ) {
-                    if (elem.type == "h1") {
+                    if (elem.type == "heading1") {
                         return '<h1 class="test-h1-class">' + content + '</h1>';
                     }
                 }
