@@ -16,6 +16,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 - `accessToken` is optional, depending if your repository needs it or not.
 - `release` the name or raw reference of the release you want to generate; if none specified then master release will be generated
 - `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;" will be used
+- `htmlSerializer` an optional function to format the resulting HTML. You don't have to write the HTML serialization for all the possible types, just the ones you want to override the default behavior
 
 
 ```json
@@ -43,6 +44,7 @@ var prismic = require('metalsmith-prismic');
     "accessToken": "<optional access token>",
     "release": "<optional release name or raw reference value>",
     "linkResolver": <optional linkResolver function>
+    "htmlSerializer": <optional htmlSerializer function>
 }))
 ```
 
@@ -64,7 +66,7 @@ prismic:
     pageSize: 50
 ---
 ```
-The optional `pageSize` parameter specifies the maximum number of results to retrieve for the query. The default is based on Prismic's own default of 20 items. Prismic also caps the maximum results for each query at 100. Any pageSize set above this number will be ignored by Prismic. 
+The optional `pageSize` parameter specifies the maximum number of results to retrieve for the query. The default is based on Prismic's own default of 20 items. Prismic also caps the maximum results for each query at 100. Any pageSize set above this number will be ignored by Prismic.
 
 To get around this limitation and retrieve all results, use the optional `allPages` parameter and set it to true. Doing so will force the plugin to override the `pageSize` and get all results by repeatedly executing the query against Prismic, combining all paged results.
 
