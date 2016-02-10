@@ -1,0 +1,12 @@
+<html>
+<body>
+<ul>
+{{#each prismic.macaron.results}}
+    <li style="background-image: url({{{data.image.url}}});">
+        {{{data.name.html}}}
+        <a href="{{data.related.url}}">Related</a>
+    </li>
+{{/each}}
+</ul>
+</body>
+</html>

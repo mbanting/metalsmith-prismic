@@ -105,6 +105,26 @@ describe('metalsmith-prismic', function(){
             });
     });
 
+    it('should provide link fragment urls', function(done){
+        Metalsmith('test/fixtures/link-url')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/link-url/expected', 'test/fixtures/link-url/build');
+                done();
+            });
+    });
+
     it('should generate links with the custom linkResolver', function(done){
         Metalsmith('test/fixtures/linkResolver')
             .use(prismic({
