@@ -1,0 +1,14 @@
+# Macarons
+{{#each prismic.macaron.results}}
+
+## {{{data.name.text}}}
+{{{data.description.text}}}
+{{/each}}
+
+
+# Job Offers
+{{#each prismic.jobOffers.results}}
+
+## {{{data.name.text}}}
+{{{data.profile.text}}}
+{{/each}}
