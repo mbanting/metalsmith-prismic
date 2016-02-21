@@ -3,6 +3,7 @@ var assert = require('assert');
 var Metalsmith = require('metalsmith');
 var prismic = require('..');
 var templates = require('metalsmith-templates');
+var Handlebars = require('handlebars');
 
 describe('metalsmith-prismic', function(){
     it('should retrieve content from Prismic', function(done){
@@ -21,6 +22,85 @@ describe('metalsmith-prismic', function(){
             .build(function(err){
                 if (err) return done(err);
                 equal('test/fixtures/basic/expected', 'test/fixtures/basic/build');
+                done();
+            });
+    });
+
+    it('should handle group fragments', function(done){
+        Metalsmith('test/fixtures/groups')
+            .use(prismic({
+                "url": "http://api-test.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/groups/expected', 'test/fixtures/groups/build');
+                done();
+            });
+    });
+
+    it('should handle slice fragments', function(done){
+        Metalsmith('test/fixtures/slices')
+            .use(prismic({
+                "url": "http://api-test.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/slices/expected', 'test/fixtures/slices/build');
+                done();
+            });
+    });
+    it('should handle fragment lists', function(done){
+        Metalsmith('test/fixtures/fragmentList')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/fragmentList/expected', 'test/fixtures/fragmentList/build');
+                done();
+            });
+    });
+
+    it('should handle fetch link content', function(done){
+        Metalsmith('test/fixtures/fetchLinks')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/fetchLinks/expected', 'test/fixtures/fetchLinks/build');
                 done();
             });
     });

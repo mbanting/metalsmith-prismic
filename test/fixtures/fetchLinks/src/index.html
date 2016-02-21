@@ -1,0 +1,8 @@
+---
+template: index.hbt
+prismic:
+  jobOffers:
+    query: '[[:d = any(document.type, ["job-offer"])]]'
+    arrayFragments: true
+    fetchLinks: 'store.name,store.address,product.name'
+---
