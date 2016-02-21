@@ -179,7 +179,7 @@ describe('metalsmith-prismic', function(){
         Metalsmith('test/fixtures/preview')
             .use(prismic({
                 "url": "http://lesbonneschoses.prismic.io/api",
-                "release": "UlfoxUnM08QWYXdk"  // St-Patrick specials
+                "release": "UlfoxUnM08QWYXdk"  // New SF Shop release
             }))
 
             // .use (log())
