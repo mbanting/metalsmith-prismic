@@ -52,8 +52,7 @@ var prismic = require('metalsmith-prismic');
 
 Pulling in content from the site's repository in [Prismic.io] for display is a two step process.
 
-##### Query and Order the Content
-In your file's metadata add the Prismic queries and optional orderings or pageSize
+In your file's metadata add the Prismic queries and optional orderings, pageSize, arrayFragments, and fetchLinks parameters
 ```yaml
 ---
 template: index_en.hbt
@@ -64,29 +63,30 @@ prismic:
     query: '[[:d = at(document.type, "hero-slide")]]'
     orderings: '[my.hero-slide.seqNum]'
     pageSize: 50
----
-```
-The optional `pageSize` parameter specifies the maximum number of results to retrieve for the query. The default is based on Prismic's own default of 20 items. Prismic also caps the maximum results for each query at 100. Any pageSize set above this number will be ignored by Prismic.
-
-To get around this limitation and retrieve all results, use the optional `allPages` parameter and set it to true. Doing so will force the plugin to override the `pageSize` and get all results by repeatedly executing the query against Prismic, combining all paged results.
-
-By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the form name (eg. collection name)
-```yaml
----
-template: index_en.hbt
-prismic:
-  page-header-footer:
-    query: '[[:d = at(document.type, "page-header-footer")]]'
-  hero-slide:
-    query: '[[:d = at(document.type, "hero-slide")]]'
-    orderings: '[my.hero-slide.seqNum]'
-    pageSize: 50
+    arrayFragments: true
   blog:
     query: '[[:d = at(document.type, "blog")]]'
     allPages: true
     formName: 'tech-related'
 ---
 ```
+###### query
+The required `query` parameter specifies the query to run, following the [Prismic's predicate-based query syntax](https://developers.prismic.io/documentation/api-documentation#predicate-based-queries).
+
+###### orderings
+The optional `orderings` parameter specifies how the results should be ordered, following the [Prismic's ordering syntax](https://developers.prismic.io/documentation/api-documentation#orderings).
+
+###### pageSize & allPages
+The optional `pageSize` parameter specifies the maximum number of results to retrieve for the query. The default is based on Prismic's own default of 20 items. Prismic also caps the maximum results for each query at 100. Any pageSize set above this number will be ignored by Prismic.
+
+To get around this limitation and retrieve all results, use the optional `allPages` parameter and set it to true. Doing so will force the plugin to override the `pageSize` and get all results by repeatedly executing the query against Prismic, combining all paged results.
+
+###### arrayFragments
+Prismic has an undocumented feature where fragments named like location[0], location[1] and so on, will be returned as an array in the request response. By default, only the first one will be returned. To get an array of all the fragments, use the optional `arrayFragments` parameter and set to true.
+
+###### formName
+By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the `formName` (eg. collection name)
+
 This pulls the Prismic response into the file's metadata.
 
 ```yaml
@@ -164,6 +164,19 @@ This pulls the Prismic response into the file's metadata.
   contents: []
   mode: "0644"
 
+---
+```
+
+###### fetchLinks
+Prismic supports fetching data from nested documents through links using the Prismic `fetchLinks` query parameter. You can use this specify the nested content to be retrieved with this plugin as well.
+```yaml
+---
+template: index.hbt
+prismic:
+  jobOffers:
+    query: '[[:d = any(document.type, ["job-offer"])]]'
+    arrayFragments: true
+    fetchLinks: 'store.name,store.address,product.name'
 ---
 ```
 
