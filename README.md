@@ -16,6 +16,7 @@ A Metalsmith.io plugin to pull in content from [Prismic.io]
 - `accessToken` is optional, depending if your repository needs it or not.
 - `release` the name or raw reference of the release you want to generate; if none specified then master release will be generated
 - `linkResolver` an optional function to generate links or the path of a generated collection of files; if none specified then a default format of "/&lt;document.type&gt;/&lt;document.id&gt;/&lt;document.slug&gt;" will be used
+- `htmlSerializer` an optional function to format the resulting HTML. You don't have to write the HTML serialization for all the possible types, just the ones you want to override the default behavior
 
 
 ```json
@@ -43,6 +44,7 @@ var prismic = require('metalsmith-prismic');
     "accessToken": "<optional access token>",
     "release": "<optional release name or raw reference value>",
     "linkResolver": <optional linkResolver function>
+    "htmlSerializer": <optional htmlSerializer function>
 }))
 ```
 
@@ -235,6 +237,19 @@ Now that this content from Prismic is available in the file's metadata, you can 
     {{{prismic.blog-post.results.[0].data.author.html}}}
     {{{prismic.blog-post.results.[0].data.post.html}}}
 </div>
+```
+
+### htmlSerializer
+If you choose to pass a custom `htmlSerializer` function, it will alter the `html` property of fragments with the applicable element types.
+
+```javascript
+
+"htmlSerializer": function (elem, content) {
+    // Add a class to all <h1>:
+    if (elem.type == "heading1") {
+        return '<h1 class="test-h1-class">' + content + '</h1>';
+    }
+}
 ```
 
 ## To Do
