@@ -52,7 +52,7 @@ var prismic = require('metalsmith-prismic');
 
 Pulling in content from the site's repository in [Prismic.io] for display is a two step process.
 
-In your file's metadata add the Prismic queries and optional orderings, pageSize, arrayFragments, and fetchLinks parameters
+In your file's metadata add the Prismic queries and optional orderings, pageSize, arrayFragments, fetchLinks and htmlSerializer parameters
 ```yaml
 ---
 template: index_en.hbt
@@ -180,6 +180,19 @@ prismic:
 ---
 ```
 
+##### htmlSerializer
+If you choose to pass a custom `htmlSerializer` function, it will alter the `html` property of fragments with the applicable element types.
+
+```javascript
+
+"htmlSerializer": function (elem, content) {
+    // Add a class to all <h1>:
+    if (elem.type == "heading1") {
+        return '<h1 class="test-h1-class">' + content + '</h1>';
+    }
+}
+```
+
 ##### Generating a Collection of Files
 You'll often need to generate a collection of files from a collection of documents, such as blog posts. This can be achieved with the `collection` property designating that data binding to generate one file for every document in the query's result.
 ```yaml
@@ -237,19 +250,6 @@ Now that this content from Prismic is available in the file's metadata, you can 
     {{{prismic.blog-post.results.[0].data.author.html}}}
     {{{prismic.blog-post.results.[0].data.post.html}}}
 </div>
-```
-
-### htmlSerializer
-If you choose to pass a custom `htmlSerializer` function, it will alter the `html` property of fragments with the applicable element types.
-
-```javascript
-
-"htmlSerializer": function (elem, content) {
-    // Add a class to all <h1>:
-    if (elem.type == "heading1") {
-        return '<h1 class="test-h1-class">' + content + '</h1>';
-    }
-}
 ```
 
 ## To Do
