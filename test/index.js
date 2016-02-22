@@ -132,7 +132,11 @@ describe('metalsmith-prismic', function(){
     it('should generate multiple files from the results of the collection prismic query', function(done){
         Metalsmith('test/fixtures/collection')
             .use(prismic({
-                "url": "http://lesbonneschoses.prismic.io/api"
+                "url": "http://lesbonneschoses.prismic.io/api",
+                "linkResolver": function (ctx, doc) {
+                    if (doc.isBroken) return false;
+                    return '/' + doc.type + '/' + doc.id.toLowerCase() + '/' + doc.slug + (ctx.maybeRef ? '?ref=' + ctx.maybeRef : '');
+                }
             }))
 
             //.use (log())
