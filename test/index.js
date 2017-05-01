@@ -105,6 +105,26 @@ describe('metalsmith-prismic', function(){
             });
     });
 
+    it('should retrieve bookmarks from Prismic', function(done){
+        Metalsmith('test/fixtures/bookmarks')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/bookmarks/expected', 'test/fixtures/bookmarks/build');
+                done();
+            });
+    });
+
     it('should generate links with the custom linkResolver', function(done){
         Metalsmith('test/fixtures/linkResolver')
             .use(prismic({

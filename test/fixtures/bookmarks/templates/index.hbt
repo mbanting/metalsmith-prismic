@@ -1,0 +1,20 @@
+<html>
+<body>
+    <div class="about">
+        {{{ prismic.about.data.title.html }}}
+        {{{ prismic.about.data.short_lede.html }}}
+    </div>
+    <div class="jobs">
+        {{{ prismic.jobs.data.title.html }}}
+        {{{ prismic.jobs.data.short_lede.html }}}
+    </div>
+    <div class="stores">
+        {{{ prismic.stores.data.title.html }}}
+        {{{ prismic.stores.data.short_lede.html }}}
+    </div>
+    <div class="missing">
+        {{{ prismic.missing.data.title.html }}}
+        {{{ prismic.missing.data.short_lede.html }}}
+    </div>
+</body>
+</html>
