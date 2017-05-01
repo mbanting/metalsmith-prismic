@@ -64,6 +64,7 @@ prismic:
     orderings: '[my.hero-slide.seqNum]'
     pageSize: 50
     arrayFragments: true
+    output: html, text
   blog:
     query: '[[:d = at(document.type, "blog")]]'
     allPages: true
@@ -89,6 +90,9 @@ Prismic has an undocumented feature where fragments named like location[0], loca
 
 ###### formName
 By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the `formName` (eg. collection name)
+
+###### output
+By default the plugin will generate the HTML output for each Prismic fragment. Use the `output` parameter to control which outputs to generate from the fragments. Valid outputs are `html` and `text`, multiple options should be comma separated.
 
 This pulls the Prismic response into the file's metadata.
 
