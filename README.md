@@ -64,6 +64,7 @@ prismic:
     orderings: '[my.hero-slide.seqNum]'
     pageSize: 50
     arrayFragments: true
+    output: html, text
   blog:
     query: '[[:d = at(document.type, "blog")]]'
     allPages: true
@@ -72,6 +73,9 @@ prismic:
 ```
 ###### query
 The required `query` parameter specifies the query to run, following the [Prismic's predicate-based query syntax](https://developers.prismic.io/documentation/api-documentation#predicate-based-queries).
+
+###### bookmark
+The `query` parameter may be replaced by a `bookmark` parameter, which fetches a single document defined by a [Prismic bookmark](https://developers.prismic.io/documentation/repository-administrators-manual#bookmarks).
 
 ###### orderings
 The optional `orderings` parameter specifies how the results should be ordered, following the [Prismic's ordering syntax](https://developers.prismic.io/documentation/api-documentation#orderings).
@@ -86,6 +90,9 @@ Prismic has an undocumented feature where fragments named like location[0], loca
 
 ###### formName
 By default the query runs against the _everything_ Prismic form. To run against a different form (eg. a collection), provide the `formName` (eg. collection name)
+
+###### output
+By default the plugin will generate the HTML output for each Prismic fragment. Use the `output` parameter to control which outputs to generate from the fragments. Valid outputs are `html` and `text`, multiple options should be comma separated.
 
 This pulls the Prismic response into the file's metadata.
 
@@ -254,7 +261,7 @@ Now that this content from Prismic is available in the file's metadata, you can 
 
 ## To Do
 - This plugin is still early in development and has only been tested with a limited set of Prismic queries and predicates. If anything isn't working please let me know!
-- Mock out Prismic for unit tests, and for integration tests switch to this project's own Prismic repository instead of using the default one
+- Repo that this previously tested against (http://lesbonneschoses.prismic.io/api) is now gone. Need to update tests to point to new repo.
 
 ## License
 

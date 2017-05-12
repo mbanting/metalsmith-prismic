@@ -26,6 +26,26 @@ describe('metalsmith-prismic', function(){
             });
     });
 
+    it('should support text output', function(done){
+        Metalsmith('test/fixtures/textOutput')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/textOutput/expected', 'test/fixtures/textOutput/build');
+                done();
+            });
+    });
+
     it('should handle group fragments', function(done){
         Metalsmith('test/fixtures/groups')
             .use(prismic({
@@ -101,6 +121,26 @@ describe('metalsmith-prismic', function(){
             .build(function(err){
                 if (err) return done(err);
                 equal('test/fixtures/fetchLinks/expected', 'test/fixtures/fetchLinks/build');
+                done();
+            });
+    });
+
+    it('should retrieve bookmarks from Prismic', function(done){
+        Metalsmith('test/fixtures/bookmarks')
+            .use(prismic({
+                "url": "http://lesbonneschoses.prismic.io/api"
+            }))
+
+            //.use (log())
+
+            // use Handlebars templating engine to insert content
+            .use(templates({
+                "engine": "handlebars"
+            }))
+
+            .build(function(err){
+                if (err) return done(err);
+                equal('test/fixtures/bookmarks/expected', 'test/fixtures/bookmarks/build');
                 done();
             });
     });
