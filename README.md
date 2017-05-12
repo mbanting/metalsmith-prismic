@@ -261,7 +261,7 @@ Now that this content from Prismic is available in the file's metadata, you can 
 
 ## To Do
 - This plugin is still early in development and has only been tested with a limited set of Prismic queries and predicates. If anything isn't working please let me know!
-- Mock out Prismic for unit tests, and for integration tests switch to this project's own Prismic repository instead of using the default one
+- Repo that this previously tested against (http://lesbonneschoses.prismic.io/api) is now gone. Need to update tests to point to new repo.
 
 ## License
 
